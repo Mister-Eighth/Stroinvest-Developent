@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="32"
+   height="12"
+   viewBox="0 0 32.000001 11.999999"
+   fill="none"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="sid-logo.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="10.432145"
+     inkscape:cx="23.96439"
+     inkscape:cy="18.165007"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8" />
+  <defs
+     id="defs1">
+    <clipPath
+       id="clip_path_1">
+      <rect
+         width="60.189999"
+         height="16.377001"
+         id="rect1"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#clip_path_1)"
+     id="g8">
+    <path
+       d="m 12.063448,3.0771349 c 0,0 0,-3.0771349 0,-3.0771349 0,0 -6.5780409,0 -6.5780409,0 0,0 -5.23324152,0.75899838 -5.48205178,5.2749416 -0.16039074,6.2591774 5.48205178,6.6643454 5.48205178,6.6643454 0,0 6.5780409,0 6.5780409,0 0,0 0,-3.0164219 0,-3.0164219 0,0 -6.4454101,0 -6.4454101,0 0,0 -2.6546656,-0.4700105 -2.6186818,-3.1738141 0.2169381,-1.9766802 2.486051,-2.6719161 2.486051,-2.6719161 z"
+       fill="#4c638b"
+       fill-rule="evenodd"
+       id="path1"
+       style="stroke-width:1.0261" />
+    <path
+       d="m 14.511393,0.06369263 c 0,0 2.968251,0 2.968251,0 0,0 0,11.93620437 0,11.93620437 h -2.968251 z"
+       fill="#e02a75"
+       fill-rule="evenodd"
+       id="path3"
+       style="stroke-width:1.0261" />
+    <path
+       d="m 20.443635,0.06379513 h 5.743204 c 0,0 3.004224,-0.05965038 4.514612,2.70072187 1.453702,2.2286566 1.293307,6.218024 1.293307,6.218024 V 12 H 19.737299 V 8.982541 h 9.160738 c 0,0 0.305366,-2.6914657 -0.775215,-4.5231322 C 27.484347,3.330159 26.186829,3.1419575 26.186829,3.1419575 h -2.646436 v 3.8320158 h -3.096765 z"
+       fill="#4c638b"
+       fill-rule="evenodd"
+       id="path4"
+       sodipodi:nodetypes="cccccccccccccc"
+       style="stroke-width:1.0261" />
+  </g>
+</svg>

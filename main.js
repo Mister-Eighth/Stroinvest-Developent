@@ -82,6 +82,7 @@ function initializePopup(openSelector, closeSelector, popupSelector) {
   });
 }
 
+/* Init popup */
 initializePopup('.panel-popup-openBtn', '.panel-popup-closeBtn', '.panel-popup');
 
 
@@ -159,7 +160,7 @@ function initMouseDrag(sliderId) {
   });
 }
 
-/* Initialize all sliders */
+/* Init sliders */
 document.querySelectorAll('.slider').forEach(slider => {
   const sliderId = slider.id;
   slider.querySelector('.prev').addEventListener('click', () => moveSlide(sliderId, -1));
@@ -173,46 +174,99 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 /* Accordion menu */
-function accordionMenu(menuSelectorAll, btnlSelector, contentSelector) {
-  const accordions = document.querySelectorAll(menuSelectorAll);
+function accordionMenu(btnSelector, wrapperSelector, contentSelector) {
+  const button = document.querySelector(btnSelector);
+  const wrapper = document.querySelector(wrapperSelector);
+  const content = document.querySelector(contentSelector);
 
-  accordions.forEach(element => {
-    const btn = element.querySelector(btnlSelector);
-    const content = element.querySelector(contentSelector);
-
-    // Учитываем padding, добавляя его к scrollHeight
-    const originalHeight = content.scrollHeight + 
-      parseInt(getComputedStyle(content).paddingTop) + 
-      parseInt(getComputedStyle(content).paddingBottom) + 'px';
-
-    content.style.setProperty('--accordion-height', '0');
-    content.style.transition = 'height ease-out 300ms';
-
-    btn.addEventListener('click', () => {
-      const isActive = btn.classList.toggle('active');
-      accordions.forEach(item => {
-        if (item !== element) {
-          const otherBtn = item.querySelector(btnlSelector);
-          const otherContent = item.querySelector(contentSelector);
-          otherBtn.classList.remove('active');
-          otherContent.dataset.ariaExpanded = 'false';
-          // // Убираем margin, если требуется
-          // otherContent.style.setProperty('--accordion-height', '0');
-        }
-      });
-
-      if (isActive) {
-        // Если содержимое слишком большое, анимация будет длиться дольше
-        const accordionTimeAnimate = content.scrollHeight <= 300 ? '300ms' : (content.scrollHeight * 1.2) + 'ms';
-        content.style.setProperty('--accordion-height', originalHeight);
-        content.style.setProperty('--accordion-time', accordionTimeAnimate);
-        content.dataset.ariaExpanded = 'true';
-      } else {
-        content.style.setProperty('--accordion-height', '0');
-        content.dataset.ariaExpanded = 'false';
-      }
-    });
+  button.addEventListener('click', () => {
+    if (wrapper.getAttribute('data-aria-expanded') === 'true') {
+      button.classList.remove('active');
+      content.classList.remove('expand');
+      wrapper.setAttribute('data-aria-expanded', 'false');
+    } else {
+      button.classList.add('active');
+      content.classList.add('expand');
+      wrapper.setAttribute('data-aria-expanded', 'true');
+    }
   });
+
 }
 
-accordionMenu('.sidebar__item', '.sidebar-button', '.sidebar__item-wrapper');
+/* Init accordion menu */
+accordionMenu('.sidebar-button', '.sidebar__items-wrapper', '.sidebar__items');
+
+
+
+
+
+
+/* Card slider */
+function createSlider(container) {
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
+
+  const sliderContainer = container.querySelector('[data-wrapper]');
+  const nextButton = container.querySelector('[data-button="next"]');
+  const prevButton = container.querySelector('[data-button="prev"]');
+
+  function containerWidth() {return sliderContainer.offsetWidth;}
+
+  /* Resize Fn */
+  function observerResizeElement(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
+  let res = containerWidth();
+  window.addEventListener('resize', observerResizeElement(() => { res = containerWidth(); }, 250));
+
+  /* Event: Start dragging */
+  sliderContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - sliderContainer.offsetLeft;
+    scrollLeft = sliderContainer.scrollLeft;
+  });
+
+  /* Event: Stop dragging */
+  sliderContainer.addEventListener('mouseleave', () => { isDragging = false; });
+  sliderContainer.addEventListener('mouseup', () => { isDragging = false; });
+
+  /* Event: Mouse move */
+  sliderContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - sliderContainer.offsetLeft;
+    const walk = (x - startX) * 2;
+    sliderContainer.scrollLeft = scrollLeft - walk;
+  });
+
+  /* Touch events */
+  sliderContainer.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX - sliderContainer.offsetLeft;
+    scrollLeft = sliderContainer.scrollLeft;
+  });
+
+  sliderContainer.addEventListener('touchend', () => { isDragging = false; });
+
+  sliderContainer.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.touches[0].pageX - sliderContainer.offsetLeft;
+    const walk = (x - startX) * 2;
+    sliderContainer.scrollLeft = scrollLeft - walk;
+  });
+
+  /* Scroll buttons */
+  nextButton.addEventListener('click', () => { sliderContainer.scrollLeft += Math.ceil(res/3); });	
+  prevButton.addEventListener('click', () => { sliderContainer.scrollLeft -= Math.ceil(res/3); });
+}
+
+/* Init card slider */
+const sliders = document.querySelectorAll('.partners-container');
+sliders.forEach(slider => createSlider(slider));
